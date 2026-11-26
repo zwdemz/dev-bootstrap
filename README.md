@@ -117,34 +117,6 @@ Java 切换：
 ./build.sh
 ```
 
-## 可信推送（签名提交）
-
-本仓库使用 **SSH 签名提交**，`scripts/trusted-push.sh` 会在推送前校验签名与同步状态：
-
-```bash
-./scripts/trusted-push.sh
-# 或指定分支
-./scripts/trusted-push.sh main
-```
-
-一次性配置（新机器）：
-
-```bash
-git config --global gpg.format ssh
-git config --global user.signingkey ~/.ssh/id_ed25519.pub
-git config --global commit.gpgsign true
-git config --global tag.gpgsign true
-git config --global gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers
-```
-
-`~/.ssh/allowed_signers` 内容（邮箱与密钥）：
-
-```
-you@example.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA...
-```
-
-提交时带 `-S`（或开启全局 `commit.gpgsign`）；并把公钥作为 **Signing Key** 添加到 GitHub（Settings → SSH and GPG keys → New SSH key → Key type: Signing Key），提交才会显示 **Verified**。
-
 ## 说明
 
 - 数据库模块只装**客户端**；服务端建议 Docker 按需启动，避免和宿主机已有实例冲突。
